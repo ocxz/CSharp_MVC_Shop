@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e79e75474cc4f8e8b17d2e70c99bb11" Name="Diagram1" ZoomLevel="76" >
+        <EntityTypeShape EntityType="DataModel.Address" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="DataModel.AdminInfo" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.Bill" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="DataModel.Provider" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="DataModel.UserInfo" Width="1.5" PointX="3" PointY="5.125" />
+        <AssociationConnector Association="DataModel.FK_ProviderAddress" />
+        <AssociationConnector Association="DataModel.FK_UserInfoAddress" />
+        <AssociationConnector Association="DataModel.FK_BillProvider" />
+        <AssociationConnector Association="DataModel.FK_BillUserInfo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

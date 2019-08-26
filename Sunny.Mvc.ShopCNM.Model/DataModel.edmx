@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="Address" EntityType="DataModel.Store.Address" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AdminInfo" EntityType="DataModel.Store.AdminInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bill" EntityType="DataModel.Store.Bill" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Provider" EntityType="DataModel.Store.Provider" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserInfo" EntityType="DataModel.Store.UserInfo" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ProviderAddress" Association="DataModel.Store.FK_ProviderAddress">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Provider" EntitySet="Provider" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoAddress" Association="DataModel.Store.FK_UserInfoAddress">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BillProvider" Association="DataModel.Store.FK_BillProvider">
+      <End Role="Provider" EntitySet="Provider" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BillUserInfo" Association="DataModel.Store.FK_BillUserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Aid" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Pid" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Sname" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Memame" Type="nvarchar" Nullable="true" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="AdminInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="AdminPwd" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="AdminPhone" Type="nchar" Nullable="true" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProductUnit" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ProductCount" Type="int" Nullable="true" />
+    <Property Name="TotalMoney" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="ProviderId" Type="int" Nullable="false" />
+    <Property Name="UserInfoId" Type="int" Nullable="false" />
+    <Property Name="DelFlag" Type="bit" Nullable="true" DefaultValue="true" />
+    <Property Name="CreateTime" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="LinkMan" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="LinkPhone" Type="nchar" Nullable="false" MaxLength="11" />
+    <Property Name="LinkAddress" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Fax" Type="nchar" Nullable="true" MaxLength="11" />
+    <Property Name="Detial" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateTime" Type="datetime" Nullable="true" />
+    <Property Name="DelFlag" Type="bit" Nullable="true" DefaultValue="true" />
+    <Property Name="AddressId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="UPwd" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="UGender" Type="bit" Nullable="true" />
+    <Property Name="UBirthday" Type="datetime" Nullable="true" />
+    <Property Name="UPhone" Type="nchar" Nullable="true" MaxLength="11" />
+    <Property Name="UCategory" Type="int" Nullable="true" />
+    <Property Name="AddressDetial" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DelFlag" Type="bit" Nullable="true" DefaultValue="true" />
+    <Property Name="AddressId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ProviderAddress">
+    <End Role="Address" Type="DataModel.Store.Address" Multiplicity="1" />
+    <End Role="Provider" Type="DataModel.Store.Provider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Provider">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoAddress">
+    <End Role="Address" Type="DataModel.Store.Address" Multiplicity="1" />
+    <End Role="UserInfo" Type="DataModel.Store.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BillProvider">
+    <End Role="Provider" Type="DataModel.Store.Provider" Multiplicity="1" />
+    <End Role="Bill" Type="DataModel.Store.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BillUserInfo">
+    <End Role="UserInfo" Type="DataModel.Store.UserInfo" Multiplicity="1" />
+    <End Role="Bill" Type="DataModel.Store.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="UserInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="DataModel.Address" />
+          <EntitySet Name="AdminInfo" EntityType="DataModel.AdminInfo" />
+          <EntitySet Name="Bill" EntityType="DataModel.Bill" />
+          <EntitySet Name="Provider" EntityType="DataModel.Provider" />
+          <EntitySet Name="UserInfo" EntityType="DataModel.UserInfo" />
+          <AssociationSet Name="FK_ProviderAddress" Association="DataModel.FK_ProviderAddress">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Provider" EntitySet="Provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfoAddress" Association="DataModel.FK_UserInfoAddress">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillProvider" Association="DataModel.FK_BillProvider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillUserInfo" Association="DataModel.FK_BillUserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Pid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Memame" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Provider" Relationship="DataModel.FK_ProviderAddress" FromRole="Address" ToRole="Provider" />
+          <NavigationProperty Name="UserInfo" Relationship="DataModel.FK_UserInfoAddress" FromRole="Address" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="AdminInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="AdminPwd" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="AdminPhone" Type="String" Nullable="true" MaxLength="11" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCount" Type="Int32" />
+          <Property Name="TotalMoney" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <Property Name="ProviderId" Type="Int32" Nullable="false" />
+          <Property Name="UserInfoId" Type="Int32" Nullable="false" />
+          <Property Name="DelFlag" Type="Boolean" Nullable="true" DefaultValue="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Provider" Relationship="DataModel.FK_BillProvider" FromRole="Bill" ToRole="Provider" />
+          <NavigationProperty Name="UserInfo" Relationship="DataModel.FK_BillUserInfo" FromRole="Bill" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="LinkMan" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="LinkPhone" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LinkAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Detial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DelFlag" Type="Boolean" Nullable="true" DefaultValue="true" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="DataModel.FK_ProviderAddress" FromRole="Provider" ToRole="Address" />
+          <NavigationProperty Name="Bill" Relationship="DataModel.FK_BillProvider" FromRole="Provider" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="UPwd" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="UGender" Type="Boolean" Nullable="true" />
+          <Property Name="UBirthday" Type="DateTime" Precision="3" />
+          <Property Name="UPhone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="UCategory" Type="Int32" />
+          <Property Name="AddressDetial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DelFlag" Type="Boolean" Nullable="true" DefaultValue="true" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="DataModel.FK_UserInfoAddress" FromRole="UserInfo" ToRole="Address" />
+          <NavigationProperty Name="Bill" Relationship="DataModel.FK_BillUserInfo" FromRole="UserInfo" ToRole="Bill" />
+        </EntityType>
+        <Association Name="FK_ProviderAddress">
+          <End Type="DataModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="DataModel.Provider" Role="Provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Provider">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfoAddress">
+          <End Type="DataModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="DataModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillProvider">
+          <End Type="DataModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="DataModel.Bill" Role="Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillUserInfo">
+          <End Type="DataModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="DataModel.Bill" Role="Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="UserInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContainer">
+    <EntitySetMapping Name="Address">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Address)">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Aid" ColumnName="Aid" />
+          <ScalarProperty Name="Pid" ColumnName="Pid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Sname" ColumnName="Sname" />
+          <ScalarProperty Name="Memame" ColumnName="Memame" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.AdminInfo)">
+        <MappingFragment StoreEntitySet="AdminInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="AdminPwd" ColumnName="AdminPwd" />
+          <ScalarProperty Name="AdminPhone" ColumnName="AdminPhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bill">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Bill)">
+        <MappingFragment StoreEntitySet="Bill">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BName" ColumnName="BName" />
+          <ScalarProperty Name="ProductUnit" ColumnName="ProductUnit" />
+          <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />
+          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="UserInfoId" ColumnName="UserInfoId" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provider">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Provider)">
+        <MappingFragment StoreEntitySet="Provider">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="LinkMan" ColumnName="LinkMan" />
+          <ScalarProperty Name="LinkPhone" ColumnName="LinkPhone" />
+          <ScalarProperty Name="LinkAddress" ColumnName="LinkAddress" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Detial" ColumnName="Detial" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.UserInfo)">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UName" ColumnName="UName" />
+          <ScalarProperty Name="UPwd" ColumnName="UPwd" />
+          <ScalarProperty Name="UGender" ColumnName="UGender" />
+          <ScalarProperty Name="UBirthday" ColumnName="UBirthday" />
+          <ScalarProperty Name="UPhone" ColumnName="UPhone" />
+          <ScalarProperty Name="UCategory" ColumnName="UCategory" />
+          <ScalarProperty Name="AddressDetial" ColumnName="AddressDetial" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

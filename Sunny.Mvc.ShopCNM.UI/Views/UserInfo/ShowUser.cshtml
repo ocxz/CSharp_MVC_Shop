@@ -1,0 +1,20 @@
+﻿@model Sunny.Mvc.ShopCNM.UI.Models.Show.UserInfoShow
+@using Sunny.Mvc.ShopCNM.Common
+
+<div class="location">
+    <strong>你现在所在的位置是:</strong>
+    <span>用户管理页面 >> 用户信息查看页面</span>
+</div>
+<div class="providerView">
+    <p><strong>用户编号：</strong><span>@Model.Uid</span></p>
+    <p><strong>用户名称：</strong><span>@Model.UName</span></p>
+    <p><strong>用户性别：</strong><span>@Model.UGender</span></p>
+    <p><strong>出生日期：</strong><span>@ViewData["UBirthday"]</span></p>
+    <p><strong>用户电话：</strong><span>@Model.UPhone</span></p>
+    <p><strong>用户地址：</strong><span>@Model.UAddress</span></p>
+    <p><strong>用户类别：</strong><span>@Model.UCategory</span></p>
+
+    <a href="@MyUtils.GetUrl("../UserInfo",new { uNamelike = ViewData["uNamelike"], pageIndex = Session["pageIndex"] })">返回</a>
+    @*<a href="../UserInfo/?pageIndex=@Session["pageIndex"]">返回</a>*@
+</div>
+

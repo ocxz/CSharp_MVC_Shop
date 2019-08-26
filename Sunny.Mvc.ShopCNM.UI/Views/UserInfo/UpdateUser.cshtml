@@ -1,0 +1,86 @@
+﻿@model Sunny.Mvc.ShopCNM.Model.UserInfo
+@using Sunny.Mvc.ShopCNM.Model
+
+<div class="location">
+    <strong>你现在所在的位置是:</strong>
+    <span>用户管理页面 >> 用户修改页面</span>
+</div>
+<div class="providerAdd">
+    <form method="post">
+        <!--div的class 为error是验证错误，ok是验证成功-->
+        <input type="hidden" name="Id" value="@ViewData["userId"]" />
+        <div>
+            <label for="UName">用户名称：</label>
+            <input type="text" name="UName" id="userName" value="@Model.UName" data-val="true" data-val-regex="*请用户名称不正确" data-val-regex-pattern="^[\u4e00-\u9fa5]{2,10}$" data-val-required="*请输入用户名称" />
+            <span data-valmsg-for="UName" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label for="UPwd">用户密码：</label>
+            <input type="password" name="UPwd" id="userpassword" value="@Model.UPwd" data-val="true" data-val-regex="*密码格式不正确" data-val-regex-pattern="^[a-zA-Z]\w{5,17}$" data-val-required="*请输入用户密码" />
+            <span data-valmsg-for="UPwd" data-valmsg-replace="true"></span>
+
+        </div>
+        <div>
+            <label for="userRemi">确认密码：</label>
+            <input type="password" name="userRemi" id="userRemi" value="@Model.UPwd" data-val="true" data-val-equalto="*两次密码不一致" data-val-equalto-other="*.UPwd" data-val-required="*请输入确认密码" />
+            <span data-valmsg-for="userRemi" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label>用户性别：</label>
+
+            <select name="UGender" impl-dev="true" selectValue="@Model.UGender.ToString()">
+                <option value="True">男</option>
+                <option value="False">女</option>
+            </select>
+            <span></span>
+        </div>
+        <div>
+            <label for="UBirthday">出生日期：</label>
+            <input type="datetime" name="UBirthday" id="data" value="@Model.UBirthday.Value.Year/@Model.UBirthday.Value.Month/@Model.UBirthday.Value.Day" data-val="true" data-val-date="*日期格式不正确" />
+            <span data-valmsg-for="UBirthday" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label for="UPhone">用户电话：</label>
+            <input type="text" name="UPhone" id="userphone" value="@Model.UPhone" data-val="true" data-val-regex="*手机号格式不正确" data-val-regex-pattern="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$" />
+            <span data-valmsg-for="UPhone" data-valmsg-replace="true">*</span>
+        </div>
+        <div>
+            <label for="userAddress">用户地址：</label>
+            <select id="UPro" name="UPro" style="width:100px">
+                <option value="@(((Address)ViewData["Pro"]).Aid)">@(((Address)ViewData["Pro"]).Name)</option>
+            </select>
+            -
+            <select id="UCity" name="UCity" style="width:100px">
+                <option value="@(((Address)ViewData["City"]).Aid)">@(((Address)ViewData["City"]).Name)</option>
+            </select>
+            -
+            <select id="UCounty" name="UCounty" style="width:100px">
+                <option value="@Model.Address.Aid">@Model.Address.Name</option>
+            </select>
+            -
+            <input type="text" name="AddressDetial" id="@Model.AddressDetial" />
+        </div>
+        <div impl-dev="true" selectValue="@Model.UCategory">
+            <label>用户类别：</label>
+            <input type="radio" name="UCategory" value="1" checked="checked" />管理员
+            <input type="radio" name="UCategory" value="2" />经理
+            <input type="radio" name="UCategory" value="3" />普通用户
+
+        </div>
+        <div class="providerAddBtn">
+            <!--<a href="#">保存</a>-->
+            <!--<a href="userList.html">返回</a>-->
+            <input type="button" value="保存" submit="true" />
+            <input type="button" value="返回" onclick="history.back(-1)" />
+        </div>
+    </form>
+</div>
+
+@section script{
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/js.js"></script>
+}
+
+

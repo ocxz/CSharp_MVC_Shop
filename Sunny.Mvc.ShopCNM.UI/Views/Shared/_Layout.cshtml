@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>超市账单管理系统</title>
+    <link href="~/css/public.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    @RenderSection("head", false)
+</head>
+<body>
+    <!--头部-->
+    <header class="publicHeader">
+        <h1>超市账单管理系统</h1>
+
+        <div class="publicHeaderR">
+            <p><span id="hours"></span>！<span style="color: #fff21b">@Session["userName"]</span> , 欢迎你！</p>
+            <a href="../Admin">退出</a>
+        </div>
+    </header>
+    <!--时间-->
+    <section class="publicTime">
+        <span id="time">2015年1月1日 11:11  星期一</span>
+        <a href="#">温馨提示：为了能正常浏览，请使用高版本浏览器！（IE10+）</a>
+    </section>
+    <!--主体内容-->
+    <section class="publicMian ">
+        <div class="left">
+            <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
+            <nav>
+                <ul class="list" impl-dev=true active-index="@Session["toLook"]">
+                    <li><a href="../Bill">账单管理</a></li>
+                    <li><a href="../Provider">供应商管理</a></li>
+                    <li><a href="../UserInfo">用户管理</a></li>
+                    <li><a href="../RPassword">密码修改</a></li>
+                    <li><a href="../Admin">退出系统</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="right">
+            @RenderBody()
+        </div>
+    </section>
+
+    <!--点击无权限弹出的页面-->
+    <div class="zhezhao"></div>
+    @RenderSection("popUp", false)
+    <div class="remove" id="limited">
+        <div class="removerChid">
+            <h2>提示</h2>
+            <div class="removeMain">
+                <p>没有此权限</p>
+                <a href="" id="limited-yes">确定</a>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        @RenderSection("footer", false)
+    </footer>
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/time.js"></script>
+    <script src="~/js/js.js"></script>
+    @RenderSection("script", false)
+</body>
+</html>

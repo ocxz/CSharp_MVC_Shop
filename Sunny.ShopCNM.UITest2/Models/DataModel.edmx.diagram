@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ee81d304a6b848e189de14228f634043" Name="Diagram1" ZoomLevel="90" >
+        <EntityTypeShape EntityType="DataModel.UserInfo" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="DataModel.Province" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="DataModel.City" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="DataModel.County" Width="1.5" PointX="7.5" PointY="3.75" />
+        <EntityTypeShape EntityType="DataModel.Address" Width="1.5" PointX="0.75" PointY="2.875" />
+        <AssociationConnector Association="DataModel.AddressUserInfo" />
+        <AssociationConnector Association="DataModel.ProvinceCity" />
+        <AssociationConnector Association="DataModel.CityCounty" />
+        <AssociationConnector Association="DataModel.ProvinceAddress" />
+        <AssociationConnector Association="DataModel.CityAddress" />
+        <AssociationConnector Association="DataModel.CountyAddress" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

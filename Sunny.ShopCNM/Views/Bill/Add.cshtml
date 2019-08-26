@@ -1,0 +1,53 @@
+﻿<div class="location">
+    <strong>你现在所在的位置是:</strong>
+    <span>账单管理页面 >> 订单添加页面</span>
+</div>
+
+<div class="providerAdd">
+    <form method="post">
+        <!--div的class 为error是验证错误，ok是验证成功-->
+        <div>
+            <label for="billName">商品名称：</label>
+            <input type="text" name="BName" id="billName" data-val="true" data-val-required="*请输入商品名称" />
+            <span data-valmsg-for="BName" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label for="billCom">生产商：</label>
+            <input type="text" name="ProductUnit" id="billCom" data-val="true" data-val-required="*请输入生产商名称" />
+            <span data-valmsg-for="ProductUnit" data-valmsg-replace="true"></span>
+
+        </div>
+        <div>
+            <label for="billNum">商品数量：</label>
+            <input type="number" name="ProductCount" id="billNum" data-val="true" data-val-regex="*数量格式不正确" data-val-regex-pattern="^\d+$" data-val-required="*请输入商品数量" data-val-range="商品数量范围不正确" data-val-range-max="100000" data-val-range-min="0" />
+            <span data-valmsg-for="ProductCount" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label for="money">总金额：</label>
+            <input type="number" name="TotalMoney" id="money" data-val="true" data-val-regex="*格式不正确" data-val-required="*请输入商品总金额" data-val-regex-pattern="^[0-9]+(\.[0-9]{1,10})?$" data-val-range="商品金额范围不正确" data-val-range-max="100000000" data-val-range-min="0" />
+            <span data-valmsg-for="TotalMoney" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label>供应商：</label>
+            <select name="ProviderId" impl-dev="true" data-url="../Util/AjaxGetAllPro" load-one="true" auto-tag="option"></select>
+        </div>
+        <div>
+            <label>是否付款：</label>
+            <input type="radio" name="IsPaid" value="false" checked />未付款
+            <input type="radio" name="IsPaid" value="true" />已付款
+        </div>
+        <div class="providerAddBtn">
+            <!--<a href="#">保存</a>-->
+            <!--<a href="billList.html">返回</a>-->
+            <input type="button" value="保存" submit="true" />
+            <input type="button" value="返回" onclick="history.back(-1)" />
+        </div>
+    </form>
+</div>
+
+@section script{
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/js.js"></script>
+}

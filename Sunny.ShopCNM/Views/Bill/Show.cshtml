@@ -1,0 +1,19 @@
+﻿@model Sunny.ShopCNM.Models.models.BillShow
+@using Sunny.ShopCNM.Common
+
+<div class="location">
+    <strong>你现在所在的位置是:</strong>
+    <span>账单管理页面 >> 信息查看</span>
+</div>
+<div class="providerView">
+    <p><strong>订单编号：</strong><span>@Model.Bid</span></p>
+    <p><strong>商品名称：</strong><span>@Model.BName</span></p>
+    <p><strong>商品单位：</strong><span>@Model.ProductUnit</span></p>
+    <p><strong>商品数量：</strong><span>@Model.ProductCount</span></p>
+    <p><strong>总金额：</strong><span>@Model.TotalMoney</span></p>
+    <p><strong>供应商：</strong><span>@Model.ProviderName</span></p>
+    <p><strong>是否付款：</strong><span>@Model.IsPaid</span></p>
+    <p><strong>创建人：</strong><span>@Model.LinkMan</span></p>
+    <p><strong>创建时间：</strong><span>@Model.CreateTime</span></p>
+    <a href="@MyUtils.GetUrl("../Bill",new { bNamelike = ViewData["bNamelike"], proId = ViewData["proId"], isPaid = ViewData["isPaid"],pageIndex = Session["pageIndex"]})">返回</a>
+</div>

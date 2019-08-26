@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Sunny.ShopCNM.Models.models.BillShow>
+@using Sunny.ShopCNM.Common
+@section head{
+
+    <link href="~/css/page.css" rel="stylesheet" />
+}
+
+<div class="location">
+    <strong>你现在所在的位置是:</strong>
+    <span>账单管理页面</span>
+</div>
+<div class="search">
+    <form method="get" id="searchForm">
+        <span>商品名称：</span>
+        <input type="text" placeholder="请输入商品的名称" name="bNamelike" value="@ViewData["bNamelike"]" />
+        <span>供应商：</span>
+        <select name="proId" id="proId" impl-dev="true" data-url="../Util/AjaxGetAllPro" load-one="true" auto-tag="option" selectValue="@ViewData["proId"]">
+            <option value="">--请选择--</option>
+        </select>
+        <span>是否付款：</span>
+        <select name="isPaid" id="isPaid" impl-dev="true" selectValue="@ViewData["isPaid"]">
+            <option value="">--请选择--</option>
+            <option value="true">已付款</option>
+            <option value="false">未付款</option>
+        </select>
+        <input type="button" value="查询" submit="true" />
+        <a href="Bill/Add" limited="@ViewData["limited"]">添加订单</a>
+    </form>
+</div>
+<!--账单表格 样式和供应商公用-->
+<table class="providerTable" cellpadding="0" cellspacing="0">
+    <tr class="firstTr">
+        <th width="10%">账单编码</th>
+        <th width="20%">商品名称</th>
+        <th width="10%">供应商</th>
+        <th width="10%">账单金额</th>
+        <th width="10%">是否付款</th>
+        <th width="10%">创建时间</th>
+        <th width="10%">负责人</th>
+        <th width="20%">操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Bid</td>
+            <td>@item.BName</td>
+            <td>@item.ProviderName</td>
+            <td>@item.ProductCount</td>
+            <td>@item.IsPaid</td>
+            <td>@item.CreateTime</td>
+            <td>@item.LinkMan</td>
+            <td>
+                <a href="@MyUtils.GetUrl("../Bill/Show",new {bNamelike=ViewData["bNamelike"],proId = ViewData["proId"],isPaid = ViewData["isPaid"],bId=item.Id})"><img src="~/img/read.png" alt="查看" title="查看" /></a>
+                <a href="@MyUtils.GetUrl("../Bill/Update",new {bNamelike=ViewData["bNamelike"],bId=item.Id})" limited="@ViewData["limited"]"><img src="~/img/xiugai.png" alt="修改" title="修改" /></a>
+                <a href="../Bill/Delete?bId=@item.Id" class="removeUser" impl-dev="true" OpElementId="removeBi" limited="@ViewData["limited"]"><img src="~/img/schu.png" alt="删除" title="删除" /></a>
+            </td>
+        </tr>
+    }
+</table>
+@{var par = new { bNamelike = ViewData["bNamelike"].ToString(), proId = ViewData["proId"].ToString(), isPaid = ViewData["isPaid"].ToString() };}
+@Html.AddPageNav((int)ViewData["pageIndex"], (int)ViewData["pageSize"], (int)ViewData["totalPage"], 5, par)
+
+@section popUp{
+    <!--点击删除按钮后弹出的页面-->
+    <div class="zhezhao"></div>
+    <div class="remove" id="removeBi">
+        <div class="removerChid">
+            <h2>提示</h2>
+            <div class="removeMain">
+                <p>你确定要删除该订单吗？</p>
+                <a href="#" id="yes">确定</a>
+                <a href="#" id="no">取消</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section script{
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/js.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#proId").change(function () {
+                $("#searchForm").submit();
+            });
+            $("#isPaid").change(function () {
+                $("#searchForm").submit();
+            });
+        });
+    </script>
+}

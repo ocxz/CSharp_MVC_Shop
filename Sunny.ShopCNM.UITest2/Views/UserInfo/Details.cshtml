@@ -1,0 +1,74 @@
+﻿@model Sunny.ShopCNM.UITest2.Models.UserInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UPwd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UPwd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UBirthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UBirthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

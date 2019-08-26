@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Sunny.Mvc.ShopCNM.Model.Address>
+
+<div class="location">
+    <strong>你现在所在的位置是:</strong>
+    <span>用户管理页面 >> 用户添加页面</span>
+</div>
+<div class="providerAdd">
+    <form method="post">
+        <!--div的class 为error是验证错误，ok是验证成功-->
+        <div>
+            <label for="UName">用户名称：</label>
+            <input type="text" name="UName" id="userName" data-val="true" data-val-regex="*用户格式不正确" data-val-regex-pattern="^[\u4e00-\u9fa5]{2,10}$" data-val-required="*请输入用户名称" />
+            <span data-valmsg-for="UName" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label for="UPwd">用户密码：</label>
+            <input type="password" name="UPwd" id="userpassword" data-val="true" data-val-regex="*密码格式不正确" data-val-regex-pattern="^[a-zA-Z]\w{5,17}$" data-val-required="*请输入用户密码" />
+            <span data-valmsg-for="UPwd" data-valmsg-replace="true"></span>
+
+        </div>
+        <div>
+            <label for="userRemi">确认密码：</label>
+            <input type="password" name="userRemi" id="userRemi" data-val="true" data-val-equalto="*两次密码不一致" data-val-equalto-other="*.UPwd" data-val-required="*请输入确认密码" />
+            <span data-valmsg-for="userRemi" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label>用户性别：</label>
+
+            <select name="UGender">
+                <option value="true">男</option>
+                <option value="false">女</option>
+            </select>
+            <span></span>
+        </div>
+        <div>
+            <label for="UBirthday">出生日期：</label>
+            <input type="datetime" name="UBirthday" id="data" data-val="true" data-val-date="*日期格式不正确" />
+            <span data-valmsg-for="UBirthday" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+            <label for="UPhone">用户电话：</label>
+            <input type="text" name="UPhone" id="userphone" data-val="true" data-val-regex="*手机号格式不正确" ajax-check-msg="*该手机号已存在" ajax-url="../Util/AjaxCheckPhone" data-val-regex-pattern="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$" />
+            <span data-valmsg-for="UPhone" data-valmsg-replace="true">*</span>
+        </div>
+        <div>
+
+            <label for="userAddress">用户地址：</label>
+            <select id="UPro" name="UPro" style="width:100px">
+                <option value="110000">北京市</option>
+            </select>
+            -
+            <select id="UCity" name="UCity" style="width:100px">
+                <option value="110100">北京市</option>
+            </select>
+            -
+            <select id="UCounty" name="UCounty" style="width:100px">
+                <option value="110101">东城区</option>
+            </select>
+            -
+            <input type="text" name="AddressDetial" id="userAddress" />
+        </div>
+        <div>
+            <label>用户类别：</label>
+            <input type="radio" name="UCategory" value="1" checked="checked" />管理员
+            <input type="radio" name="UCategory" value="2" />经理
+            <input type="radio" name="UCategory" value="3" />普通用户
+
+        </div>
+        <div class="providerAddBtn">
+            <!--<a href="#">保存</a>-->
+            <!--<a href="userList.html">返回</a>-->
+            <input type="button" value="保存" submit="true" />
+            <input type="button" value="返回" onclick="history.back(-1)" />
+        </div>
+    </form>
+</div>
+
+@section script{
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/js.js"></script>
+}

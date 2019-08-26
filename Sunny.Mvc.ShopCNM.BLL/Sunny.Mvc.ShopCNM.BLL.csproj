@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{696B7518-5CC3-4D7F-9362-2418E8564327}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sunny.Mvc.ShopCNM.BLL</RootNamespace>
+    <AssemblyName>Sunny.Mvc.ShopCNM.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressService.cs" />
+    <Compile Include="AdminInfoService.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="BillService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderService.cs" />
+    <Compile Include="UserIndoService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sunny.Mvc.ShopCNM.DalFactory\Sunny.Mvc.ShopCNM.DalFactory.csproj">
+      <Project>{12F86FAD-D76C-4FF8-983E-350B6DD29A2C}</Project>
+      <Name>Sunny.Mvc.ShopCNM.DalFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sunny.Mvc.ShopCNM.IBLL\Sunny.Mvc.ShopCNM.IBLL.csproj">
+      <Project>{095D4695-FADD-4DF4-AD87-CC72EFD6E103}</Project>
+      <Name>Sunny.Mvc.ShopCNM.IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sunny.Mvc.ShopCNM.IDAL\Sunny.Mvc.ShopCNM.IDAL.csproj">
+      <Project>{06964B83-CABA-44C6-AFC8-A4F088F2CACC}</Project>
+      <Name>Sunny.Mvc.ShopCNM.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sunny.Mvc.ShopCNM.Model\Sunny.Mvc.ShopCNM.Model.csproj">
+      <Project>{9341B231-B3AB-4E8A-8AD2-6C35C523D8C9}</Project>
+      <Name>Sunny.Mvc.ShopCNM.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
